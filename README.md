@@ -47,10 +47,8 @@ In pratica, eBPF fornisce una visibilità granulare sui flussi di rete e sul com
 
 La repository è organizzata come segue:
 
-- **/config**: File di configurazione per Kathara, inclusi gli script per la creazione dell’ambiente emulato.  
-- **/ebpf**: Codice sorgente dei programmi eBPF, inclusi esempi e script per il caricamento e la gestione.  
-- **/tests**: Script e tool per simulare attacchi DDoS e testare la capacità del sistema di identificarli.  
 - **/docs**: Documentazione di approfondimento sul progetto, note tecniche e risultati delle sperimentazioni.
+- **/lab**: File di configurazione per Kathara, inclusi gli script per la creazione dell’ambiente emulato.
 
 ## Conclusioni
 
