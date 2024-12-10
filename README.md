@@ -2,8 +2,10 @@
 
 **Autori:**  
 - Leonardo Crozzoli (matr. 576633)  
-- Lorenzo Benzi (matr. 578295)  
-**Relatore:** Tommaso Caiazzi (Kathara Team)
+- Lorenzo Benzi (matr. 578295) 
+
+**Relatore:** 
+- Tommaso Caiazzi (Kathara Team)
 
 ## Introduzione
 
