@@ -48,7 +48,7 @@ In pratica, eBPF fornisce una visibilità granulare sui flussi di rete e sul com
 La repository è organizzata come segue:
 
 - **/docs**: Documentazione di approfondimento sul progetto, note tecniche e risultati delle sperimentazioni.
-- **/lab**: File di configurazione per Kathara, inclusi gli script per la creazione dell’ambiente emulato.
+- **/docker images**: File di configurazione per Kathara, inclusi gli script per la creazione dell’ambiente emulato.
 
 ## Conclusioni
 
