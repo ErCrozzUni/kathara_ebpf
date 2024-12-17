@@ -7,7 +7,7 @@ import time
 DEST_IP = "195.11.14.5"   # L'IP di destinazione dove è in ascolto l'eBPF
 DEST_PORT = 9999          # Porta di destinazione arbitraria
 SRC_PORT = 3333           # Porta sorgente arbitraria
-INTERVAL = 0.1              # Invia un pacchetto al secondo
+INTERVAL = 1              # Invia un pacchetto al secondo
 
 def main():
     # Creiamo un singolo pacchetto UDP

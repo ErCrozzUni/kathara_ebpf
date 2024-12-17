@@ -18,8 +18,7 @@ struct flow_stats {
     __u64 byte_count;
     __u64 first_ts;
     __u64 last_ts;
-    __u64 prev_ts;
-    __u64 pps;
+    __u64 avg_pps;  // Average packets per second with precision up to 0.xxx
 };
 
 #define MY_IP bpf_htonl(0xC30B0E05)
@@ -77,25 +76,16 @@ int count_udp_flows(struct xdp_md *ctx) {
     if (stats) {
         stats->packet_count += 1;
         stats->byte_count += ip_len;
+        stats->last_ts = now;
 
-        if (stats->packet_count == 2) {
-            // Secondo pacchetto: possiamo ora calcolare un pps iniziale
-            stats->prev_ts = stats->last_ts;
-            stats->last_ts = now;
-            __u64 interval = stats->last_ts - stats->prev_ts;
-            if (interval > 0) {
-                stats->pps = 1000000000ULL / interval;
-            }
-        } else if (stats->packet_count > 2) {
-            // Dal terzo pacchetto in poi
-            stats->prev_ts = stats->last_ts;
-            stats->last_ts = now;
-            __u64 interval = stats->last_ts - stats->prev_ts;
-            if (interval > 0) {
-                stats->pps = 1000000000ULL / interval;
+        // Calcolo dell'average pps con precisione decimale
+        if (stats->packet_count > 1) {
+            __u64 duration_ns = stats->last_ts - stats->first_ts;
+            if (duration_ns > 0) {
+                // Moltiplica per 1000 per avere precisione a 0.xxx
+                stats->avg_pps = (stats->packet_count * 1000000000ULL * 1000) / duration_ns;
             }
         }
-
     } else {
         // Primo pacchetto
         struct flow_stats new_stats = {};
@@ -103,8 +93,7 @@ int count_udp_flows(struct xdp_md *ctx) {
         new_stats.byte_count = ip_len;
         new_stats.first_ts = now;
         new_stats.last_ts = now;
-        new_stats.prev_ts = 0;
-        new_stats.pps = 0;
+        new_stats.avg_pps = 0;
 
         bpf_map_update_elem(&flow_map, &key, &new_stats, BPF_ANY);
     }
