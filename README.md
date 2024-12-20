@@ -1,55 +1,45 @@
-# Tracciamento di Flussi Malevoli in Kathara tramite eBPF
+Tracking Malicious Flows in Kathara using eBPF
+Authors:
 
-**Autori:**  
-- Leonardo Crozzoli (matr. 576633)  
-- Lorenzo Benzi (matr. 578295) 
+Leonardo Crozzoli (ID 576633)
+Lorenzo Benzi (ID 578295)
+Advisor:
 
-**Relatore:** 
-- Tommaso Caiazzi (Kathara Team)
+Tommaso Caiazzi (Kathara Team)
+Introduction
+In this repository, you will find a collection of directories and files related to our thesis research. The primary goal of the project is to experiment with advanced techniques for tracking malicious flows within the Kathara network emulation environment using eBPF programs.
 
-## Introduzione
+In the field of cybersecurity, monitoring network traffic flows is essential to detect anomalous and potentially harmful activities.
+Early interception of a cyber attack can greatly reduce its impact on systems and network infrastructure.
 
-In questa repository troverete la raccolta delle directory e dei file legati al nostro studio per la tesi, il cui obiettivo principale è sperimentare, all’interno dell’ambiente di emulazione di rete [Kathara](https://github.com/KatharaFramework/Kathara) tecniche avanzate per il tracciamento di flussi malevoli attraverso l’impiego di programmi **eBPF**.
+What is Kathara?
+Kathara is a network emulation framework that allows for the rapid and flexible creation and testing of complex topologies. Based on Linux containers, Kathara makes it possible to configure routers, switches, hosts, and various services in a modular way. With this environment, we can simulate realistic network scenarios and evaluate the behavior of protocols, security solutions, and monitoring systems without the need for costly physical infrastructure.
 
-Nel mondo della sicurezza informatica monitoriamo i flussi di traffico della rete per individuare attività anomale e potenzialmente dannose.  
-Intercettare precocemente un attacco informatico può ridurre enormemente l’impatto sui sistemi e sull’infrastruttura di rete.
+What is a DDoS Attack?
+A DDoS (Distributed Denial of Service) attack is a type of cyber assault in which multiple malicious sources send an enormous volume of requests to a specific target (a server, an online service, a website) to overload it and prevent normal operation. A DDoS attack obstructs legitimate users from accessing network resources, causing financial and reputational damage.
 
-## Cos’è Kathara?
+What are eBPF Programs?
+eBPF (Extended Berkeley Packet Filter) is a technology integrated into the Linux kernel that allows for analyzing, filtering, and modifying network traffic “on the fly.” Unlike traditional systems, eBPF enables the insertion of small programs directly into the kernel without the need to recompile it or use external modules. These programs stand out for their:
 
-**Kathara** è un framework di emulazione di rete che consente di creare e sperimentare topologie complesse in modo rapido e flessibile. Basato su container Linux, Kathara rende possibile la configurazione di router, switch, host e servizi vari in maniera modulare. Grazie a questo ambiente, possiamo simulare scenari di rete realistici e valutare il comportamento di protocolli, soluzioni di sicurezza e sistemi di monitoraggio senza dover disporre di costose infrastrutture fisiche.
+Efficiency: Operate close to the system core, reducing latency and overhead.
+Flexibility: Can be updated on the fly, allowing dynamic evolution of filtering logic.
+Security: The eBPF security model verifies programs before execution, reducing the risk of kernel instability.
+In practice, eBPF provides granular visibility into network flows and application behavior in real time. This allows for the timely identification of suspicious activities, enabling intervention before they compromise the stability of the entire infrastructure.
 
-## Che cos’è un attacco DDoS?
+Project Objectives
+Emulation of Realistic Scenarios with Kathara:
+Reproduce a complex network environment that simulates realistic situations, including topologies with multiple sources and destinations, heterogeneous protocols, and dynamic paths.
 
-Un attacco **DDoS (Distributed Denial of Service)** è una tipologia di aggressione informatica in cui molteplici fonti malevole inviano un volume enorme di richieste a un target specifico (un server, un servizio online, un sito web), con l’obiettivo di sovraccaricarlo e impedirne il normale funzionamento. Un DDoS ostacola l’accesso alle risorse della rete da parte degli utenti legittimi, generando danni economici e d’immagine.
+Tracking Malicious Flows:
+Use eBPF programs to analyze network traffic and identify anomalous flows characteristic of DDoS attacks. The goal is to detect early signs of overload and isolate malicious sources.
 
-## Cosa sono i programmi eBPF?
+Validation and Evaluation:
+Assess the effectiveness of the proposed solutions in terms of accuracy (ability to detect malicious traffic with few false positives), performance (additional latency and overhead), and robustness (adaptability to new types of attacks).
 
-**eBPF (Extended Berkeley Packet Filter)** è una tecnologia integrata nel kernel Linux che permette di analizzare, filtrare e modificare il traffico di rete “al volo”. A differenza di sistemi tradizionali, eBPF consente di inserire piccoli programmi direttamente all’interno del kernel, senza necessità di ricompilarlo o di utilizzare moduli esterni. Questi si distinguono per:
+Repo Structure
+The repository is organized as follows:
 
-- **Efficienza:** Operano vicino al core del sistema, riducendo latenze e overhead.  
-- **Flessibilità:** Possono essere aggiornati a caldo, consentendo l’evoluzione dinamica delle logiche di filtraggio.  
-- **Sicurezza:** Il modello di sicurezza di eBPF verifica i programmi prima dell’esecuzione, riducendo il rischio di causare instabilità al kernel.
-
-In pratica, eBPF fornisce una visibilità granulare sui flussi di rete e sul comportamento delle applicazioni in tempo reale. Ciò permette di identificare tempestivamente attività sospette, intervenendo prima che compromettano la stabilità dell’intera infrastruttura.
-
-## Obiettivi del Progetto
-
-1. **Emulazione di scenari reali con Kathara:**  
-   Riprodurre un ambiente di rete complesso che simuli situazioni realistiche, incluse topologie con molteplici sorgenti e destinazioni, protocolli eterogenei e percorsi dinamici.
-
-2. **Tracciamento di flussi malevoli:**  
-   Utilizzare programmi eBPF per analizzare il traffico di rete, individuando flussi anomali tipici di attacchi DDoS. L’obiettivo è riconoscere segnali precoci di sovraccarico, isolando le fonti malevole.
-
-3. **Validazione e valutazione:**  
-   Valutare l’efficacia delle soluzioni proposte in termini di precisione (capacità di individuare il traffico malevolo con pochi falsi positivi), prestazioni (latenza aggiuntiva e overhead) e robustezza (adattabilità a nuovi tipi di attacco).
-
-## Struttura della Repo
-
-La repository è organizzata come segue:
-
-- **/docs**: Documentazione di approfondimento sul progetto, note tecniche e risultati delle sperimentazioni.
-- **/docker images**: File di configurazione per Kathara, inclusi gli script per la creazione dell’ambiente emulato.
-
-## Conclusioni
-
-Questo progetto mira a coniugare tecniche di emulazione di rete (Kathara) con l’analisi dinamica del traffico (eBPF) per individuare flussi malevoli tipici degli attacchi DDoS. Individuare tempestivamente le minacce permette di prevenirne la diffusione, garantendo sistemi più stabili, efficienti e sicuri.
+/docs: Detailed project documentation, technical notes, and experimental results.
+/docker images: Configuration files for Kathara, including scripts for setting up the emulated environment.
+Conclusions
+This project aims to combine network emulation techniques (Kathara) with dynamic traffic analysis (eBPF) to detect malicious flows typical of DDoS attacks. Timely threat detection helps prevent their spread, ensuring more stable, efficient, and secure systems.
