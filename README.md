@@ -47,8 +47,9 @@ In practice, eBPF provides granular visibility into network flows and applicatio
 
 The repository is organized as follows:
 
-- **/docs**: Detailed project documentation, technical notes, and experimental results.  
-- **/docker images**: Configuration files for Kathara, including scripts for setting up the emulated environment.
+- **/docs**: Detailed project documentation and technical notes.  
+- **ebpf**: Dockerfile configuration file for Kathara.
+- **labs**: A collection of Kathara lab environments created for experimentation. Each lab contains PCs with eBPF configurations used to test and explore the thesis topics, such as DDoS detection and malicious flow tracking 
 
 ## Conclusions
 
